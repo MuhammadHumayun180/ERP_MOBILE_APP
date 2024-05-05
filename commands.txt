@@ -1,0 +1,3 @@
+npm install --save @expo/vector-icons
+npx expo install react-native-gesture-handler 
+npm i --save @fortawesome/react-native-fontawesome @fortawesome/fontawesome-svg-core react-native-svg

@@ -1,20 +1,50 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import MainScreen from './MainScreen';
 
-export default function App() {
+import LoginPage from './screens/LoginPage';
+//import CustomInput from './components/CustomInput';
+import DrawerNavigator from './screens/Drawer'; // Import your DrawerNavigator component
+
+const Stack = createStackNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer >
+      <Stack.Navigator
+        initialRouteName="LoginPage"
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#24292d',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+      >
+        {/* Include DrawerNavigator as a screen */}
+        <Stack.Screen
+          name="Drawer"
+          component={DrawerNavigator}
+          options={{ headerShown: false }} // Hide header for drawer navigator
+        />
+        
+        {/* MainScreen and LoginPage as separate screens */}
+        <Stack.Screen
+          name="MainScreen"
+          component={MainScreen}
+          options={{ title: 'Home' }}
+        />
+        <Stack.Screen
+          name="LoginPage"
+          component={LoginPage}
+          options={{ title: 'LOGIN' }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
